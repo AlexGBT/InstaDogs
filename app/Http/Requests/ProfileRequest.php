@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Profile;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
@@ -13,7 +14,8 @@ class ProfileRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        preg_match('~/profile/(.+)$~',$this->url(),$matches);
+        return $this->user()->can('update', Profile::find($matches[1]));
     }
 
     /**

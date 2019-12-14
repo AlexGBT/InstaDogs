@@ -26,7 +26,12 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile';
+//    protected $redirectTo = ;
+
+    public function redirectPath()
+    {
+         return '/profile/'. auth()->id();
+    }
 
     /**
      * Create a new controller instance.

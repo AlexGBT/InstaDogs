@@ -46,6 +46,10 @@
                         @endif
                     </div>
 
+{{--                    <div class="form-group row">--}}
+{{--                        <input hidden name="profileId" value="{{$profile->id}}">--}}
+{{--                    </div>--}}
+
                     <div class="row">
                         <label for="image" class="col-md-4 col-form-label">Profile Image</label>
 

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Profile;
 use Illuminate\Http\Request;
-use App\User;
 use Intervention\Image\Facades\Image;
+
 class ProfileController extends Controller
 {
     /**
@@ -17,6 +17,10 @@ class ProfileController extends Controller
     public function index()
     {
 
+        $profiles = Profile::select('id', 'title', 'image','user_id')->with('user')->paginate(3);
+//        dd($profiles[2]->user);
+
+        return view('profiles.index', compact('profiles'));
     }
 
     /**
@@ -74,23 +78,8 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, Profile $profile)
     {
-        $this->authorize('update', $profile);
-
         $data = $request->except(['_token','_method']);
-
-        if (request('image')) {
-            $imagePath = request('image')->store('img/logos', 'public');
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
-            $image->save();
-            $imageArray = ['image' => $imagePath];
-        }
-
-        $profile->update(array_merge(
-            $data,
-            $imageArray ?? []
-        ));
-
-        $user = $profile->user;
+        $profile->updateData($data);
         return view('profiles.show',compact(
             'profile'
         ));
