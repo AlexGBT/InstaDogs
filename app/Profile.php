@@ -29,6 +29,16 @@ class Profile extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function getLogoAttribute()
     {
         $logoWay =  "storage/" . $this->image;

@@ -78,7 +78,7 @@
                                         All profiles
                                     </a>
                                     @isset($profile)
-                                        <a class="dropdown-item" href="{{route('profile.show',['profile' => $profile->id])}}">
+                                        <a class="dropdown-item" href="{{route('profile.show',['profile' => auth()->id()])}}">
                                             My profile
                                         </a>
                                     @endisset

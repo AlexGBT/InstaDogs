@@ -11,12 +11,23 @@
                 <div class="d-flex justify-content-between align-items-baseline">
                     <div class="d-flex align-items-center pb-3">
                         <div class="h4">{{ $profile->user->username }}</div>
+{{--                        <follow></follow>--}}
+
+                        @can('view',$profile)
+                            <follow user-id="{{ $profile->user_id }}" follows="{{ $follows }}"></follow>
+                        @endcan
+                        <div class="d-flex">
+                            <div class="pr-5"><strong>{{ $postCount }}</strong> posts</div>
+                            <div class="pr-5"><strong>{{ $followersCount }}</strong> followers</div>
+                            <div class="pr-5"><strong>{{ $followingCount }}</strong> following</div>
+                        </div>
+
 
                         {{--                        <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>--}}
                     </div>
 
                     @can('update', $profile)
-                            <a href="/p/create">Add New Post</a>
+                            <a href="{{route('post.create')}}">Add New Post</a>
                     @endcan
 
                 </div>
@@ -36,13 +47,13 @@
         </div>
 
         <div class="row pt-5">
-            {{--            @foreach($user->posts as $post)--}}
-            {{--                <div class="col-4 pb-4">--}}
-            {{--                    <a href="/p/{{ $post->id }}">--}}
-            {{--                        <img src="/storage/{{ $post->image }}" class="w-100">--}}
-            {{--                    </a>--}}
-            {{--                </div>--}}
-            {{--            @endforeach--}}
+            @foreach($profile->posts as $post)
+                <div class="col-4 pb-4">
+                    <a href="{{route('post.show', ['post' => $post->id ])}}">
+                        <img src="/storage/{{ $post->image }}" class="w-100">
+                    </a>
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection
