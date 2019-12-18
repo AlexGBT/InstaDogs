@@ -4,13 +4,6 @@
 
 
     <div class="container">
-{{--        <div class="d-flex align-items-center justify-content-md-start h-100">--}}
-{{--            <span style="background: #1b4b72; height: 50px;">dck</span>--}}
-{{--            <span>fasdg000</span>--}}
-{{--            <img src="{{ asset($profiles[2]->logo) }}" class="img-responsive rounded-circle" style="width: 60px;">--}}
-{{--            <span>sgasg</span>--}}
-{{--        </div>--}}
-
         <div class="row d-flex align-items-center justify-content-md-start">
             @foreach ($profiles as $profile)
                 <div class="col-12 p-5">

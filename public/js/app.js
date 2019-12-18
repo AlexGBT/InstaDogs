@@ -1854,7 +1854,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['userId', 'postId', 'userLogin', 'commentStatus'],
   mounted: function mounted() {
@@ -1867,7 +1866,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     });
     this.loadMore();
-    this.commentState = this.commentStatus;
+    this.commentState = +this.commentStatus;
   },
   data: function data() {
     return {
@@ -1893,12 +1892,9 @@ __webpack_require__.r(__webpack_exports__);
         post_id: this.postId,
         comments_number: this.items.length
       }).then(function (response) {
-        // console.log(response.data);
-        // console.log(self.items.length);
         for (var i = 0; i <= response.data.length; i++) {
-          self.items.push([response.data[i].body, response.data[i].user.login, response.data[i].id]); // self.items.push(response.data[i].body);
-        } // console.log(self.items);
-
+          self.items.push([response.data[i].body, response.data[i].user.login, response.data[i].id]);
+        }
       })["catch"](function (error) {
         console.log(error);
       });
@@ -1938,7 +1934,7 @@ __webpack_require__.r(__webpack_exports__);
     ableComments: function ableComments() {
       var self = this;
       axios.get('/post/' + this.postId + '/edit').then(function (response) {
-        self.commentState = !self.commentState; // console.log(response);
+        self.commentState = !self.commentState;
       })["catch"](function (error) {
         console.log(error);
       });

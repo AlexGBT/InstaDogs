@@ -4,7 +4,6 @@
             <ul class="list-group" id="infinite-list">
                 <li class="list-group-item d-flex justify-content-between" v-for="item in items" >
                     <div><strong>{{item[1]+': '}} </strong>"{{item[0]}}"</div>
-<!--                    <div @click="deleteComment">Butt</div>-->
                     <div @click="deleteComment(item[2])">del</div>
                 </li>
             </ul>
@@ -27,7 +26,7 @@
                 }
             });
             this.loadMore();
-            this.commentState = this.commentStatus;
+            this.commentState = +this.commentStatus;
 
          },
 
@@ -55,18 +54,14 @@
                     post_id: this.postId,
                     comments_number: this.items.length,
                 })
-                    .then(function (response) {
-                        // console.log(response.data);
-                        // console.log(self.items.length);
-                        for (var i = 0; i <= response.data.length; i++) {
-                            self.items.push([response.data[i].body, response.data[i].user.login, response.data[i].id]);
-                            // self.items.push(response.data[i].body);
-                        }
-                        // console.log(self.items);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                .then(function (response) {
+                    for (var i = 0; i <= response.data.length; i++) {
+                        self.items.push([response.data[i].body, response.data[i].user.login, response.data[i].id]);
+                     }
+                 })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             sendComment() {
                 let self = this;
@@ -75,44 +70,43 @@
                     post_id: this.postId,
                     user_id: this.userId,
                 })
-                    .then(function (response) {
-                        self.items.unshift([self.commentBody, self.userLogin, response.data.id]);
-                        let lastComment = document.querySelector('.list-group-item');
-                        lastComment.scrollIntoView({block: "center", behavior: "smooth"});
-                     })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                .then(function (response) {
+                    self.items.unshift([self.commentBody, self.userLogin, response.data.id]);
+                    let lastComment = document.querySelector('.list-group-item');
+                    lastComment.scrollIntoView({block: "center", behavior: "smooth"});
+                 })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
             },
             deleteComment(commentId) {
                 let self = this;
                 axios.delete('/comment/' + commentId)
-                    .then(function (response) {
-                        if (response.data == 'success') {
-                            for (var i = 0; i<=self.items.length; i++){
-                                if (self.items[i][2] == commentId) {
-                                    self.items.splice(i,1);
-                                    return
-                                }
+                .then(function (response) {
+                    if (response.data == 'success') {
+                        for (var i = 0; i<=self.items.length; i++){
+                            if (self.items[i][2] == commentId) {
+                                self.items.splice(i,1);
+                                return
                             }
                         }
-                     })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                    }
+                 })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             ableComments() {
                 let self = this;
                 axios.get('/post/' + this.postId + '/edit'
                 )
-                    .then(function (response) {
-                        self.commentState= !self.commentState ;
-                        // console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                .then(function (response) {
+                    self.commentState= !self.commentState ;
+                 })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
             }
 
