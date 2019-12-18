@@ -1867,15 +1867,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     });
     this.loadMore();
-    this.commentState = +this.commentStatus;
-  },
-  created: function created() {// let self = this;
-    // console.log(self.commentStatus);
-    //
-    // setTimeout(function () {
-    //     self.commentState = +self.commentStatus;
-    // },1000);
-    // // console.log(this.commentState);
+    this.commentState = this.commentStatus;
   },
   data: function data() {
     return {

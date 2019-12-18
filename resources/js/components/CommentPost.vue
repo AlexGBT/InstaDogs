@@ -27,19 +27,9 @@
                 }
             });
             this.loadMore();
-            this.commentState = +this.commentStatus;
+            this.commentState = this.commentStatus;
 
          },
-        created() {
-            // let self = this;
-            // console.log(self.commentStatus);
-            //
-            // setTimeout(function () {
-            //     self.commentState = +self.commentStatus;
-            // },1000);
-            // // console.log(this.commentState);
-        },
-
 
         data: function () {
             return {

@@ -40,7 +40,7 @@
 {{--                            <li>{{$comment->body}}</li>--}}
 {{--                        @endforeach--}}
 {{--                    </ul>--}}
-                    <comment-post user-id="{{$user->id}}" post-id="{{ $post->id }}" user-login="{{$user->login}}" comment-status="{{$post->allow_comments}}"></comment-post>
+                    <comment-post user-id="{{$user->id}}" post-id="{{ $post->id }}" user-login="{{$user->login}}" comment-status='@json($post->allow_comments)'></comment-post>
 
 {{--                    <form action="/comment" method="post">--}}
 {{--                        @csrf--}}
