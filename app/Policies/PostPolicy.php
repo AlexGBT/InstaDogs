@@ -56,7 +56,10 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        //
+        if( $user->profile->id == $post->profile_id ) {
+            return true;
+        }
+        return false;
     }
 
     /**

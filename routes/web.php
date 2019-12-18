@@ -23,3 +23,6 @@ Route::post('follow/{user}', 'FollowsController@store');
 
 Route::resource('/profile', 'ProfileController');
 Route::resource('/post','PostController');
+
+Route::post('/comment/load','CommentController@load');
+Route::resource('/comment','CommentController');

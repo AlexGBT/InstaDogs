@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('profile_id');
             $table->text('description')->nullable();
             $table->string('image');
+            $table->boolean('allow_comments')->default(true);
             $table->timestamps();
 
             $table->foreign('profile_id')->references('id')->on('profiles');

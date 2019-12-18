@@ -16,4 +16,6 @@ class FollowsController extends Controller
     {
         return auth()->user()->profiles()->toggle($user->profile);
     }
+
+
 }

@@ -52,7 +52,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show',compact('post'));
+        $user = auth()->user();
+        return view('posts.show',compact('post','user'));
     }
 
     /**
@@ -63,7 +64,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $this->authorize('update', $post);
+        $post->allow_comments = !$post->allow_comments ;
+        $post->save();
+        return $post;
     }
 
     /**

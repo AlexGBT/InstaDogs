@@ -25,4 +25,9 @@ class Post extends Model
     {
         return $this->belongsTo(Profile::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
