@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="list-group-wrapper" v-if="commentStatus">
+        <div class="list-group-wrapper" v-if="commentState">
             <ul class="list-group" id="infinite-list">
                 <li class="list-group-item d-flex justify-content-between" v-for="item in items" >
                     <div><strong>{{item[1]+': '}} </strong>"{{item[0]}}"</div>
@@ -9,8 +9,8 @@
                 </li>
             </ul>
         </div>
-        <textarea placeholder="Comment it" v-model="commentBody" v-if="commentStatus"></textarea>
-        <button class="btn btn-primary  " @click="sendComment" v-if="commentStatus" >Send</button>
+        <textarea placeholder="Comment it" v-model="commentBody" v-if="commentState"></textarea>
+        <button class="btn btn-primary  " @click="sendComment" v-if="commentState" >Send</button>
         <button class="btn btn-primary  " @click="ableComments" >{{commentStatusLabel}}</button>
     </div>
 </template>
@@ -27,18 +27,31 @@
                 }
             });
             this.loadMore();
+            this.commentState = +this.commentStatus;
+
+         },
+        created() {
+            // let self = this;
+            // console.log(self.commentStatus);
+            //
+            // setTimeout(function () {
+            //     self.commentState = +self.commentStatus;
+            // },1000);
+            // // console.log(this.commentState);
         },
+
 
         data: function () {
             return {
                 commentBody: '',
                 nextItem: 1,
                 items:[],
-               }
+                commentState:1,
+            }
         },
         computed: {
             commentStatusLabel: function() {
-              if (this.commentStatus) {
+              if (this.commentState) {
                   return 'Disable'
               }
                    return  'Able Comments';
@@ -76,10 +89,11 @@
                         self.items.unshift([self.commentBody, self.userLogin, response.data.id]);
                         let lastComment = document.querySelector('.list-group-item');
                         lastComment.scrollIntoView({block: "center", behavior: "smooth"});
-                    })
+                     })
                     .catch(function (error) {
                         console.log(error);
                     });
+
             },
             deleteComment(commentId) {
                 let self = this;
@@ -103,7 +117,7 @@
                 axios.get('/post/' + this.postId + '/edit'
                 )
                     .then(function (response) {
-                        self.commentStatus= !self.commentStatus ;
+                        self.commentState= !self.commentState ;
                         // console.log(response);
                     })
                     .catch(function (error) {

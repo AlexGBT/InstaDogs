@@ -1867,17 +1867,27 @@ __webpack_require__.r(__webpack_exports__);
       }
     });
     this.loadMore();
+    this.commentState = +this.commentStatus;
+  },
+  created: function created() {// let self = this;
+    // console.log(self.commentStatus);
+    //
+    // setTimeout(function () {
+    //     self.commentState = +self.commentStatus;
+    // },1000);
+    // // console.log(this.commentState);
   },
   data: function data() {
     return {
       commentBody: '',
       nextItem: 1,
-      items: []
+      items: [],
+      commentState: 1
     };
   },
   computed: {
     commentStatusLabel: function commentStatusLabel() {
-      if (this.commentStatus) {
+      if (this.commentState) {
         return 'Disable';
       }
 
@@ -1936,7 +1946,7 @@ __webpack_require__.r(__webpack_exports__);
     ableComments: function ableComments() {
       var self = this;
       axios.get('/post/' + this.postId + '/edit').then(function (response) {
-        self.commentStatus = !self.commentStatus; // console.log(response);
+        self.commentState = !self.commentState; // console.log(response);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -37387,7 +37397,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.commentStatus
+    _vm.commentState
       ? _c("div", { staticClass: "list-group-wrapper" }, [
           _c(
             "ul",
@@ -37423,7 +37433,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.commentStatus
+    _vm.commentState
       ? _c("textarea", {
           directives: [
             {
@@ -37446,7 +37456,7 @@ var render = function() {
         })
       : _vm._e(),
     _vm._v(" "),
-    _vm.commentStatus
+    _vm.commentState
       ? _c(
           "button",
           { staticClass: "btn btn-primary  ", on: { click: _vm.sendComment } },
