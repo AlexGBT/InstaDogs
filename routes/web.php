@@ -26,3 +26,5 @@ Route::resource('/post','PostController');
 
 Route::post('/comment/load','CommentController@load');
 Route::resource('/comment','CommentController');
+
+Route::post('user/search/{namePart}','UserController@search');

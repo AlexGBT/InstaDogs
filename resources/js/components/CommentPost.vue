@@ -105,6 +105,7 @@
                     self.commentState= !self.commentState ;
                  })
                 .catch(function (error) {
+                    alert('It is not your profile and your are not admin');
                     console.log(error);
                 });
 
