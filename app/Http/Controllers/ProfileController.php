@@ -9,12 +9,12 @@ class ProfileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index','show');
     }
 
     public function index()
     {
-        $profiles = Profile::select('id', 'title', 'image','user_id')->with('user')->paginate(3);
+        $profiles = Profile::select('id', 'title', 'image','user_id')->with('user')->paginate(5);
         return view('profiles.index', compact('profiles'));
     }
 

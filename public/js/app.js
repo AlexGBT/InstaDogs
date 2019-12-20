@@ -2021,10 +2021,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       userSearch: '',
       showSearchResults: false,
-      users: ''
+      users: '' // url: window.location.origin,
+
     };
   },
   methods: {
+    url: function url(id) {
+      return window.location.origin + '/profile/' + id;
+    },
     resultWrapperShow: function resultWrapperShow() {
       this.showSearchResults = true;
     },
@@ -37617,7 +37621,7 @@ var render = function() {
           "ul",
           _vm._l(_vm.users, function(user) {
             return _c("li", [
-              _c("a", { attrs: { href: user.id } }, [
+              _c("a", { attrs: { href: _vm.url(user.id) } }, [
                 _vm._v(_vm._s(user.login))
               ])
             ])

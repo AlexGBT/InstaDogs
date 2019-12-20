@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+        public function index()
     {
-        //
+            $profiles = Profile::select('id', 'title', 'image','user_id')->with('user')->paginate(5);
+            return view('profiles.index', compact('profiles'));
     }
 
     /**

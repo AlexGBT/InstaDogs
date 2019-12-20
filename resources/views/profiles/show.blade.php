@@ -30,7 +30,7 @@
                 @can('update', $profile)
                     <a href="/profile/{{ $profile->id }}/edit">Edit Profile</a>
                 @endcan
- 
+
                 <div class="pt-4 font-weight-bold">{{ $profile->title }}</div>
                 <div>{{ $profile->description }}</div>
              </div>
