@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Contracts\PersonPropertiesContract;
 use App\Http\Requests\ProfileRequest;
 use App\Profile;
 
@@ -19,14 +20,17 @@ class ProfileController extends Controller
     }
 
 
-    public function show(Profile $profile)
+    public function show(Profile $profile, PersonPropertiesContract $personProperties)
     {
+//        dd($personProperties->getPersonInfo());
+        $personInfo = $personProperties->getPersonInfo();
+        $personPrivileges = $personProperties->getPersonPrivileges();
         $follows = (auth()->user()) ? auth()->user()->profiles->contains($profile->id) : false;
         $postCount  = $profile->posts->count();
         $followersCount = $profile->users->count();
         $followingCount = $profile->user->profiles->count();
         return view('profiles.show',compact(
-            'profile', 'follows', 'postCount', 'followersCount', 'followingCount'
+            'profile', 'follows', 'postCount', 'followersCount', 'followingCount','personInfo','personPrivileges'
         ));
     }
 

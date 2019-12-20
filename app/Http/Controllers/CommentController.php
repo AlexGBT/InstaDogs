@@ -17,7 +17,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
           $data = $request->all();
-          $comment =Comment::create($data);
+          $comment = Comment::create($data);
           return $comment;
     }
 

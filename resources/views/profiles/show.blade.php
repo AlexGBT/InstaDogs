@@ -26,8 +26,23 @@
                      </div>
 
                     @can('update', $profile)
+                        @cannot('view', $profile)
                             <a href="{{route('post.create')}}">Add New Post</a>
+                        @endcannot
                     @endcan
+
+                    @cannot('view',$profile)
+                        <div>
+                            <h3>{{$personInfo}}</h3>
+                            <h5>I can:</h5>
+                            <ul>
+                                @foreach($personPrivileges as $privelege)
+                                    <li>{{$privelege}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endcannot
+
 
                 </div>
 
