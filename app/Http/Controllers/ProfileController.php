@@ -40,8 +40,6 @@ class ProfileController extends Controller
     {
         $data = $request->except(['_token','_method']);
         $profile->updateData($data);
-        return view('profiles.show',compact(
-            'profile'
-        ));
+        return redirect()->route('profile.show', ['profile' => $profile->id]);
     }
 }
