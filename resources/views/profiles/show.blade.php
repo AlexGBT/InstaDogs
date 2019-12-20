@@ -16,8 +16,12 @@
                         @endcan
                         <div class="d-flex">
                             <div class="pr-5"><strong>{{ $postCount }}</strong> posts</div>
-                            <div class="pr-5"><strong>{{ $followersCount }}</strong> followers</div>
-                            <div class="pr-5"><strong>{{ $followingCount }}</strong> following</div>
+                            <div class="pr-5"><strong>{{ $followersCount }}</strong>
+                                <a href="{{route('follow.show.followers',['id' => $profile->user_id])}}">followers</a>
+                            </div>
+                            <div class="pr-5"><strong>{{ $followingCount }}</strong>
+                                <a href="{{route('follow.show.following',['id' => $profile->user_id])}}">following</a>
+                            </div>
                         </div>
                      </div>
 

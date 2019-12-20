@@ -18,6 +18,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('follow/{user}', 'FollowsController@store');
+Route::get('follow/followers/{id}', 'FollowsController@showFollowers')->name('follow.show.followers');
+Route::get('follow/following/{id}', 'FollowsController@showFollowing')->name('follow.show.following');
+
 
 Route::resource('/profile', 'ProfileController');
 Route::resource('/post','PostController');
