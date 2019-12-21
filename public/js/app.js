@@ -1854,6 +1854,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['userId', 'postId', 'userLogin', 'commentStatus'],
   mounted: function mounted() {
@@ -1907,8 +1908,8 @@ __webpack_require__.r(__webpack_exports__);
         user_id: this.userId
       }).then(function (response) {
         self.items.unshift([self.commentBody, self.userLogin, response.data.id]);
-        var lastComment = document.querySelector('.list-group-item');
-        lastComment.scrollIntoView({
+        var commentListBegining = self.$el.querySelector('#list-begining');
+        commentListBegining.scrollIntoView({
           block: "center",
           behavior: "smooth"
         });
@@ -37456,33 +37457,38 @@ var render = function() {
           _c(
             "ul",
             { staticClass: "list-group", attrs: { id: "infinite-list" } },
-            _vm._l(_vm.items, function(item) {
-              return _c(
-                "li",
-                {
-                  staticClass: "list-group-item d-flex justify-content-between"
-                },
-                [
-                  _c("div", [
-                    _c("strong", [_vm._v(_vm._s(item[1] + ": ") + " ")]),
-                    _vm._v('"' + _vm._s(item[0]) + '"')
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteComment(item[2])
+            [
+              _c("span", { attrs: { id: "list-begining" } }),
+              _vm._v(" "),
+              _vm._l(_vm.items, function(item) {
+                return _c(
+                  "li",
+                  {
+                    staticClass:
+                      "list-group-item d-flex justify-content-between"
+                  },
+                  [
+                    _c("div", [
+                      _c("strong", [_vm._v(_vm._s(item[1] + ": ") + " ")]),
+                      _vm._v('"' + _vm._s(item[0]) + '"')
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteComment(item[2])
+                          }
                         }
-                      }
-                    },
-                    [_vm._v("del")]
-                  )
-                ]
-              )
-            }),
-            0
+                      },
+                      [_vm._v("del")]
+                    )
+                  ]
+                )
+              })
+            ],
+            2
           )
         ])
       : _vm._e(),

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "642660b1e1da0e04d76635f115b49652",
+    "content-hash": "c72413affc41fdcc21ed56de6ed8e8da",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1659,6 +1659,50 @@
                 "uuid"
             ],
             "time": "2019-12-01T04:55:27+00:00"
+        },
+        {
+            "name": "staudenmeir/belongs-to-through",
+            "version": "v2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/staudenmeir/belongs-to-through.git",
+                "reference": "cbd9a590ea0f6e952a194c8865bb7bcaee8b22d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/staudenmeir/belongs-to-through/zipball/cbd9a590ea0f6e952a194c8865bb7bcaee8b22d4",
+                "reference": "cbd9a590ea0f6e952a194c8865bb7bcaee8b22d4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^6.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Znck\\Eloquent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rahul Kadyan",
+                    "email": "hi@znck.me"
+                },
+                {
+                    "name": "Jonas Staudenmeir",
+                    "email": "mail@jonas-staudenmeir.de"
+                }
+            ],
+            "description": "Laravel Eloquent BelongsToThrough relationship",
+            "time": "2019-09-22T15:26:41+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

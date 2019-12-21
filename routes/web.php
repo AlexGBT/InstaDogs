@@ -23,6 +23,8 @@ Route::get('follow/following/{id}', 'FollowsController@showFollowing')->name('fo
 
 
 Route::resource('/profile', 'ProfileController');
+Route::get('/profile/following/posts','ProfileController@followingPosts')->name('profile.following.posts');
+
 Route::resource('/post','PostController');
 
 Route::post('/comment/load','CommentController@load');

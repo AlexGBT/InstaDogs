@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\Facades\Image;
-
 class Post extends Model
 {
+    use \Znck\Eloquent\Traits\BelongsToThrough;
     public $guarded =[];
 
     public function createPost($data)
@@ -29,5 +29,10 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsToThrough('App\User','App\Profile');
     }
 }

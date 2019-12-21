@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Contracts\PersonPropertiesContract;
 use App\Http\Requests\ProfileRequest;
+use App\Post;
 use App\Profile;
 
 class ProfileController extends Controller
@@ -46,5 +47,15 @@ class ProfileController extends Controller
         $data = $request->except(['_token','_method']);
         $profile->updateData($data);
         return redirect()->route('profile.show', ['profile' => $profile->id])->with('message','Your profile was successfully updated');
+    }
+
+    public function followingPosts()
+    {
+        $followingProfilesId = auth()->user()->profiles()->pluck('profiles.id');
+        $followingPosts = Post::whereIn('profile_id',$followingProfilesId)->latest()->take(100)->paginate(10);
+//        dd($followingPosts[0]->user->login);
+//        $p = Post::first();
+//        dd($p->user->id);
+        return view('profiles.followingPosts',compact('followingPosts'));
     }
 }

@@ -2,6 +2,7 @@
     <div>
         <div class="list-group-wrapper" v-if="commentState">
             <ul class="list-group" id="infinite-list">
+                <span id ='list-begining'></span>
                 <li class="list-group-item d-flex justify-content-between" v-for="item in items" >
                     <div><strong>{{item[1]+': '}} </strong>"{{item[0]}}"</div>
                     <div @click="deleteComment(item[2])">del</div>
@@ -28,7 +29,8 @@
             this.loadMore();
             this.commentState = +this.commentStatus;
 
-         },
+
+          },
 
         data: function () {
             return {
@@ -72,9 +74,9 @@
                 })
                 .then(function (response) {
                     self.items.unshift([self.commentBody, self.userLogin, response.data.id]);
-                    let lastComment = document.querySelector('.list-group-item');
-                    lastComment.scrollIntoView({block: "center", behavior: "smooth"});
-                 })
+                    let commentListBegining = self.$el.querySelector('#list-begining');
+                    commentListBegining.scrollIntoView({block: "center", behavior: "smooth"});
+                })
                 .catch(function (error) {
                     console.log(error);
                 });
