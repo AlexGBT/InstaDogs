@@ -37587,7 +37587,12 @@ var render = function() {
           expression: "userSearch"
         }
       ],
-      attrs: { type: "search", id: "site-search-input", name: "search" },
+      attrs: {
+        type: "search",
+        id: "site-search-input",
+        name: "search",
+        placeholder: "Search people"
+      },
       domProps: { value: _vm.userSearch },
       on: {
         input: [

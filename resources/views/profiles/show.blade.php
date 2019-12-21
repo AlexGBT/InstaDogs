@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    @include('./layouts/messages')
      <div class="container">
         <div class="row">
             <div class="col-3 p-5">
@@ -24,6 +24,8 @@
                             </div>
                         </div>
                      </div>
+
+
 
                     @can('update', $profile)
                         @cannot('view', $profile)
@@ -54,6 +56,24 @@
                 <div>{{ $profile->description }}</div>
              </div>
         </div>
+
+         @cannot('view',$profile)
+             @if(!$profile->user->email_verified_at)
+                 @if (session('resent'))
+                     <div class="alert alert-success alert-dismissible fade show" role="alert">
+                         {{ __('A fresh verification link has been sent to your email address.') }}
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                     </div>
+                 @endif
+                 <h3>You email is not verified</h3>
+                 <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                     @csrf
+                     <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Verify Email</button>
+                 </form>
+             @endif
+         @endcannot
 
         <div class="row pt-5">
             @foreach($profile->posts as $post)

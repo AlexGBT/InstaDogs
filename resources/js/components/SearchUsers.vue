@@ -1,6 +1,6 @@
 <template>
     <div>
-         <input type="search" id="site-search-input" name="search"  v-model="userSearch"  @input="getUsersFromServer"  @blur="resultWrapperHide" >
+         <input type="search" id="site-search-input" name="search"  v-model="userSearch" placeholder="Search people" @input="getUsersFromServer"  @blur="resultWrapperHide" >
          <div id="site-search-wrapper"  v-show="showSearchResults" >
             <ul>
                 <li v-for="user in users"><a v-bind:href="url(user.id)">{{user.login}}</a></li>

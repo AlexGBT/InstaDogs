@@ -7,7 +7,7 @@ use Intervention\Image\Facades\Image;
 
 class Profile extends Model
 {
-    public $guarded =[];
+    public $guarded = [];
 
     public function updateData($data)
     {

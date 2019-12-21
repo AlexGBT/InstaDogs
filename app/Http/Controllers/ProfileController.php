@@ -11,6 +11,7 @@ class ProfileController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('index','show');
+        $this->middleware('verified')->only('edit');
     }
 
     public function index()
@@ -44,6 +45,6 @@ class ProfileController extends Controller
     {
         $data = $request->except(['_token','_method']);
         $profile->updateData($data);
-        return redirect()->route('profile.show', ['profile' => $profile->id]);
+        return redirect()->route('profile.show', ['profile' => $profile->id])->with('message','Your profile was successfully updated');
     }
 }

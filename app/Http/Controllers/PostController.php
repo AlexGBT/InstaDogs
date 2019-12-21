@@ -11,6 +11,8 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('verified')->only('create');
+
     }
 
     public function create()
@@ -23,7 +25,7 @@ class PostController extends Controller
         $profile = auth()->user()->profile;
         $data = $request->except(['_token','_method']);
         $post->createPost($data);
-        return redirect()->route('profile.show',[$profile]);
+        return redirect()->route('profile.show',[$profile])->with('message','Your post successfully saved');
     }
 
     public function show(Post $post)
