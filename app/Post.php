@@ -35,4 +35,13 @@ class Post extends Model
     {
         return $this->belongsToThrough('App\User','App\Profile');
     }
+
+    public function usersThatLikedMe()
+    {
+        return $this->belongsToMany(User::class);
+    }
+    public function getUsersThatLikedMeCountAttribute()
+    {
+        return $this->usersThatLikedMe()->count();
+    }
 }

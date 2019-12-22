@@ -31,3 +31,8 @@ Route::post('/comment/load','CommentController@load');
 Route::resource('/comment','CommentController');
 
 Route::post('user/search/{namePart}','UserController@search');
+
+Route::resource('/like', 'LikeController');
+Route::get('/like/post/{id}', 'LikeController@likePost')->name('like.post');
+Route::get('/like/check/{id}', 'LikeController@likeChecker');
+

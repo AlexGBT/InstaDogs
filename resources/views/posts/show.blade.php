@@ -26,6 +26,13 @@
                      </div>
                     <hr>
                     <comment-post user-id="{{$user->id}}" post-id="{{ $post->id }}" user-login="{{$user->login}}" comment-status='@json($post->allow_comments)'></comment-post>
+                    <br>
+                    <like-post
+                        post-id="{{$post->id}}"
+                        users-that-liked-me = "{{$post->usersThatLikedMeCount}}"
+                    >
+                    </like-post>
+
                 </div>
             </div>
         </div>

@@ -19,6 +19,8 @@ window.Vue = require('vue');
 Vue.component('follow', require('./components/Follow').default);
 Vue.component('comment-post', require('./components/CommentPost.vue').default);
 Vue.component('search-users', require('./components/SearchUsers').default);
+Vue.component('like-post', require('./components/LikePost').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

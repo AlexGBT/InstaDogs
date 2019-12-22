@@ -56,4 +56,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasManyThrough( 'App\Post','App\Profile');
     }
+
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }

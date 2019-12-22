@@ -53,9 +53,6 @@ class ProfileController extends Controller
     {
         $followingProfilesId = auth()->user()->profiles()->pluck('profiles.id');
         $followingPosts = Post::whereIn('profile_id',$followingProfilesId)->latest()->take(100)->paginate(10);
-//        dd($followingPosts[0]->user->login);
-//        $p = Post::first();
-//        dd($p->user->id);
         return view('profiles.followingPosts',compact('followingPosts'));
     }
 }
