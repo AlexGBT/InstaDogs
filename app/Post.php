@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 class Post extends Model
 {
@@ -20,6 +21,21 @@ class Post extends Model
             'image' => $imagePath,
         ]);
     }
+    public static function savePost($post)
+    {
+        $post->allow_comments = !$post->allow_comments ;
+        $post->save();
+        return $post;
+    }
+
+    public static function destroyPost($post)
+    {
+        $profile = $post->profile;
+        Storage::disk('public')->delete($post->image);
+        $post->delete();
+        return  $profile;
+    }
+
 
     public function profile()
     {

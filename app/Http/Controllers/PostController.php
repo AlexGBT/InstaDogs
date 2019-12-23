@@ -38,17 +38,13 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $this->authorize('update', $post);
-        $post->allow_comments = !$post->allow_comments ;
-        $post->save();
-        return $post;
+        return Post::savePost($post);
     }
 
     public function destroy(Post $post)
     {
         $this->authorize('forceDelete', $post);
-        $profile = $post->profile;
-        Storage::disk('public')->delete($post->image);
-        $post->delete();
+        $profile = Post::destroyPost($post);
         return redirect()->route('profile.show',[$profile]);
      }
 }
