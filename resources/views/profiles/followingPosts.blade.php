@@ -1,12 +1,10 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     @foreach($followingPosts as $post)
         <div class="row">
             <div class="col-7">
-
-                <img src="/storage/{{ $post->image }}" class="w-75">
+                 <img src="/storage/{{ $post->image }}" class="w-100">
             </div>
             <div class="col-5">
                 <div>
@@ -21,6 +19,11 @@
                     </div>
                     <hr>
                     <comment-post user-id="{{$post->user->id}}" post-id="{{ $post->id }}" user-login="{{$post->user->login}}" comment-status='@json($post->allow_comments)'></comment-post>
+                    <like-post
+                        post-id="{{$post->id}}"
+                        users-that-liked-me = "{{$post->usersThatLikedMeCount}}"
+                    >
+                    </like-post>
                 </div>
             </div>
         </div>

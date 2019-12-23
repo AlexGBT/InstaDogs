@@ -24,7 +24,6 @@ class ProfileController extends Controller
 
     public function show(Profile $profile, PersonPropertiesContract $personProperties)
     {
-//        dd($personProperties->getPersonInfo());
         $personInfo = $personProperties->getPersonInfo();
         $personPrivileges = $personProperties->getPersonPrivileges();
         $follows = (auth()->user()) ? auth()->user()->profiles->contains($profile->id) : false;

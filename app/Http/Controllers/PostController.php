@@ -22,6 +22,7 @@ class PostController extends Controller
 
     public function store(PostRequest $request, Post $post)
     {
+
         $profile = auth()->user()->profile;
         $data = $request->except(['_token','_method']);
         $post->createPost($data);

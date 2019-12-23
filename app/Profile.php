@@ -24,6 +24,33 @@ class Profile extends Model
         ));
     }
 
+    public static function showFollowers($id) {
+        $role = 'Followers';
+        $login = Profile::find($id)->user->login;
+
+        $followers = Profile::find($id)->users;
+        $profiles = $followers->map(function ($item) {
+            return $item->profile;
+        });
+        $profiles = $profiles->paginate(10);
+        return [
+            'profiles' => $profiles,
+            'login'=> $login,
+            'role' =>$role
+        ];
+    }
+
+    public static function showFollowing($id) {
+        $role = 'Following';
+        $login = User::find($id)->login;
+        $profiles = User::find($id)->profiles()->paginate(10);
+        return [
+            'profiles' => $profiles,
+            'login'=> $login,
+            'role' =>$role
+        ];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

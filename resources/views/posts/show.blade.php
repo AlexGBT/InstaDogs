@@ -4,7 +4,9 @@
      <div class="container">
         <div class="row">
             <div class="col-8">
-                <img src="/storage/{{ $post->image }}" class="w-100">
+                <a href="{{route('profile.show',['profile' =>$post->user->id])}}">
+                    <img src="/storage/{{ $post->image }}" class="w-100">
+                </a>
             </div>
             <div class="col-4">
                 <div>

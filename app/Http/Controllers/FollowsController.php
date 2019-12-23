@@ -19,23 +19,20 @@ class FollowsController extends Controller
     }
 
     public function showFollowers($id) {
-        $role = 'Followers';
-        $login = Profile::find($id)->user->login;
-
-        $followers = Profile::find($id)->users;
-        $profiles = $followers->map(function ($item) {
-            return $item->profile;
-        });
-        $profiles = $profiles->paginate(10);
-         return view('users.show',compact('profiles','login', 'role'));
-
+        $showData = Profile::showFollowers($id);
+        return view('users.show',[
+            'profiles' => $showData['profiles'],
+            'login'=> $showData['login'],
+            'role' => $showData['role'],
+        ]);
     }
 
     public function showFollowing($id) {
-        $role = 'Following';
-        $login = User::find($id)->login;
-        $profiles = User::find($id)->profiles()->paginate(10);
-        return view('users.show',compact('profiles','login', 'role'));
+        $showData = Profile::showFollowing($id);
+        return view('users.show',[
+            'profiles' => $showData['profiles'],
+            'login'=> $showData['login'],
+            'role' => $showData['role'],
+        ]);
     }
-
 }
