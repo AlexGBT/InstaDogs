@@ -2036,12 +2036,20 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (errors) {});
     },
     buttonStyle: function buttonStyle(response) {
-      if (response.data.attached.length) {
-        this.$el.querySelector('.btn').style.color = 'red';
-        this.usersThatLikedMeCount++;
-      } else {
-        this.$el.querySelector('.btn').style.color = 'white';
-        this.usersThatLikedMeCount--;
+      switch (response.data) {
+        case 1:
+          this.$el.querySelector('.btn').style.color = 'white';
+          this.usersThatLikedMeCount--;
+          break;
+
+        case 'no_likes':
+          alert("you don't have any likes");
+          break;
+
+        case "":
+          this.$el.querySelector('.btn').style.color = 'red';
+          this.usersThatLikedMeCount++;
+          break;
       }
     },
     url: function url() {
@@ -2052,6 +2060,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/like/post/' + this.postId).then(function (response) {
         _this2.buttonStyle(response);
+
+        console.log(response);
       })["catch"](function (errors) {});
     }
   }

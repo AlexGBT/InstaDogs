@@ -34,12 +34,18 @@
                 });
             },
             buttonStyle(response) {
-                if (response.data.attached.length) {
-                    this.$el.querySelector('.btn').style.color = 'red';
-                    this.usersThatLikedMeCount++;
-                } else {
-                    this.$el.querySelector('.btn').style.color = 'white';
-                    this.usersThatLikedMeCount--;
+                switch (response.data) {
+                    case 1:
+                        this.$el.querySelector('.btn').style.color = 'white';
+                        this.usersThatLikedMeCount--;
+                        break;
+                    case 'no_likes':
+                        alert("you don't have any likes");
+                        break;
+                    case "":
+                        this.$el.querySelector('.btn').style.color = 'red';
+                        this.usersThatLikedMeCount++;
+                        break;
                 }
             },
             url(){
@@ -49,6 +55,7 @@
                 axios.get('/like/post/' + this.postId)
                 .then(response => {
                     this.buttonStyle(response)
+                    console.log(response);
                 })
                 .catch(errors => {
 

@@ -38,8 +38,25 @@ class LikeController extends Controller
      */
     public function likePost($id)
     {
-        $post = Post::find($id);
-        return auth()->user()->likedPosts()->toggle($post);
+        $user = auth()->user();
+        $post = $user->likedPosts->where('id',$id)->first();
+        if (!is_null($post)) {
+             return json_decode($user->likedPosts()->detach($post));
+        } else {
+            if ($user->likes_amount >= 1 ) {
+                $post = Post::find($id);
+                $user->likes_amount--;
+                $user->save();
+                return json_decode($user->likedPosts()->attach($post));
+            } else {
+                return 'no_likes';
+            }
+        }
+
+///////////////////---------------------- I MUST CHANHGE VUE LikePost !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//        $post = Post::find($id);
+//        return auth()->user()->likedPosts()->toggle($post);
     }
 
     /**

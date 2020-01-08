@@ -12,6 +12,8 @@
 */
 
 Route::get('/','UserController@index');
+//Route::get('/',function (){
+//});
 
 Auth::routes(['verify' => true]);
 

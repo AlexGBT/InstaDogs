@@ -67,7 +67,7 @@
                          </button>
                      </div>
                  @endif
-                 <h3>You email is not verified</h3>
+                 <h3>Your email is not verified</h3>
                  <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                      @csrf
                      <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Verify Email</button>
